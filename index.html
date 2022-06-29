@@ -6,9 +6,36 @@
         <link rel="stylesheet" href="./Stylesheets/style.css">
     </head>
     <body>
+        <!--NEED TO CREATE ANOTHER PAGE TO LINK TO FOR THE HIGH SCORES SECTION WHICH WILL HAVE THE WINS AND LOSSES STORED WITHIN THE LOCAL DRIVE-->
         <header id="header">
+            <input type="button" id="high-score" value="View High Scores">
+            <!--LINK THE BUTTON TO THE NEW PAGE, NOT SURE HOW TO DO YET MAYBE NEED TO ADDA  LINK IN HERE OR JAVASCRIPT-->
 
+            <!--timer counting down- TIMER COUNTING DOWN FROM A 75 SECONDS AND THEN EVERY INCORRECT ANSWER WILL ALSO DECREASE THE AAMOUNT AT THAT TIME BY LIKE 8 SECONDS OR SOMETHING-->
+            <div id="timer">
+                <p>Time: <span id="countdown-timer">75</span></p>
+            </div>
         </header>
+        <main>
+            <!--main container for whole quiz section - JUST EASY CONTAINER THAT HAS THE SMALLER CONTAINERS IN IT, POTENTIALLY JUST A CENTERED BLOCK DISPLAY-->
+
+                <!--intro page that asks player to begin - HAS A H1 THAT IS TITLE OF THE GAME AND THEN A SMALL CONTENTS SECTION THAT EXPLAINS THE RULES AND THEN SIMPLE BUTTON TO BEGIN THE GAME, CLICKING BUTTON WILL THEN SWITCH THE DISPLAY OVER TO THE NEXT PAGE-->
+
+                <!--intro page turns into the playing page- JUST NEED TO CHANGE THE CLASS SECTION IN CSS AND ADD AN EVENT LISTENER TO THE BUTTON SO THEY SWITCH OVER TO IT ON CLICKING-->
+
+                    <!--top of section  says the question - EASY H2 TEXT THAT ASKS THE QUESTION OR FILL IN THE BLANK, CAN STORE THEM IN AN ARRAY AND MAKE IT RANDOMLY CHOOSE-->
+
+                    <!--section that has the answers - PROBABLY HAVE 4 POTENTIAL ANSWERS AS BUTTONS AND CLICKING WRONG ONE LOWERS THE TIME SCORE BUT CLICKING ORRECT DOESNT CHANHGE THE TIME SCORE-->
+
+                    <!--section that says if correct or wrong- LITTLE SECTION THAT JUST POPS UP IF THE ANSEWR IS CORRECT OR WRONG-->
+
+                <!--page turns into a final score where you can input initials and then submit that score to the high scores page and local drive-- A FORM SECTION WHERE IT JUST STATES THE FINAL SCORE (COUNTER) AND THEN A TEXT INPUT FORM TO PUT IN INITIALS AND THEN SIMPLE SUBMIT BUTTON WHICH SENDS THE INFO TO THE LOCAL STORAGE-->
+                
+                
+
+
+
+        </main>
 
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script type="text/javascript" src="./Applications/app.js"></script>
