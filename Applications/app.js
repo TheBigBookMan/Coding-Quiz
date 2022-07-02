@@ -7,8 +7,12 @@ var questionFourId = $('.question-four');
 var questionFiveId = $('.question-five');
 var questionSixId = $('.question-six');
 
+var finalScorePage = $('.final-score')
+
 var currentPage =$('.introduction')
 var container = $('.quiz-container');
+
+var timeEl = $('#timer');
 
 var variablePageCurrent = 'intro'
 
@@ -84,6 +88,23 @@ const answerButtons = function(questionArrayAnswers) {
     console.log("eigth" + questionArrayAnswers)
 };
 
+var secondsLeft = 60;
+
+const setTime = function() {
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeEl.text("Time: " + secondsLeft);
+
+        if (secondsLeft <= 0) {
+            clearInterval(timerInterval);
+            variablePageCurrent = "questionSix";
+            pageLooper();
+        } else if (variablePageCurrent === "finalScore") {
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
+
 //start button
 beginBtn.on('click', event => {
     event.preventDefault();
@@ -92,6 +113,7 @@ beginBtn.on('click', event => {
         currentPage.attr('class', 'question-one');
         console.log("variablepagecurrent" + variablePageCurrent)
         questionOneCreation();
+        setTime();
         return variablePageCurrent;
     } 
 });
@@ -115,8 +137,45 @@ const pageLooper = function() {
         console.log('fourth currentpage' + variablePageCurrent);
         currentPage.attr('class', 'question-four');
         questionFourCreation();
+    } else if (variablePageCurrent === "questionFour") {
+        variablePageCurrent = "questionFive";
+        console.log('fifthcurrentpage' + variablePageCurrent);
+        currentPage.attr('class', 'question-five');
+        questionFiveCreation();
+    } else if (variablePageCurrent === "questionFive") {
+        variablePageCurrent = "questionSix";
+        currentPage.attr('class', 'question-six');
+        questionSixCreation();
+    } else if (variablePageCurrent === "questionSix") {
+        variablePageCurrent = "finalScore";
+        currentPage.attr('class', 'final-score');
+        finalScorePageCreation();
     }
 };
+
+//function for creating final score page
+const finalScorePageCreation = function() {
+    $('.final-score').empty();
+    var finalScoreHeading = $('<h2>');
+    var finalScore = $('<h1>');
+    if (secondsLeft <= 0) {
+        finalScoreHeading.text('Your final score is determined by the amount of time left, you ran out of time so your score is ');
+        finalScore.text('0')
+        currentPage.append(finalScoreHeading);
+        currentPage.append(finalScore)
+    } else {
+        finalScoreHeading.text('Your final score is determined by the amount of time left, your score is ');
+        finalScore.text(secondsLeft - 1);
+        currentPage.append(finalScoreHeading);
+        currentPage.append(finalScore);
+    }
+    
+    var submissionText = $('<h3>');
+    submissionText.text('Input your initials to submit your score: ')
+    submission
+    currentPage.append(submissionText);
+    // put a submit form for initials underneath which links to the high scores page
+}
 
 // creating question-one page
 const questionOneCreation = function() {
@@ -250,20 +309,81 @@ const questionFourCreation = function() {
     });
 };
 
+const questionFiveCreation = function() {
+    $('.question-five').empty();
+    var questionFiveQuestion = $('<h2>');
+    questionFiveQuestion.text(question5Question);
+    currentPage.append(questionFiveQuestion); 
+    currentPage.append(buttonContainer);
+    console.log("seventh" + question5Answers)
+    answerButtons(question5Answers);
+    
+    button1.on('click', event => {
+        buttonValue = button1.val();
+        event.preventDefault();
+        console.log(variablePageCurrent)
+        correctAnswerFunction(buttonValue);
+    });
+
+    button2.on('click', function() {
+        buttonValue = button2.val();
+        correctAnswerFunction(buttonValue);
+        console.log(buttonValue)
+    });
+    
+    button3.on('click', function() {
+        buttonValue = button3.val();
+        correctAnswerFunction(buttonValue);
+    });
+    
+    button4.on('click', function() {
+        buttonValue = button4.val();
+        correctAnswerFunction(buttonValue);
+    });
+};
+
+const questionSixCreation = function() {
+    $('.question-six').empty();
+    var questionSixQuestion = $('<h2>');
+    questionSixQuestion.text(question6Question);
+    currentPage.append(questionSixQuestion); 
+    currentPage.append(buttonContainer);
+    console.log("seventh" + question6Answers)
+    answerButtons(question6Answers);
+    
+    button1.on('click', event => {
+        buttonValue = button1.val();
+        event.preventDefault();
+        console.log(variablePageCurrent)
+        correctAnswerFunction(buttonValue);
+    });
+
+    button2.on('click', function() {
+        buttonValue = button2.val();
+        correctAnswerFunction(buttonValue);
+        console.log(buttonValue)
+    });
+    
+    button3.on('click', function() {
+        buttonValue = button3.val();
+        correctAnswerFunction(buttonValue);
+    });
+    
+    button4.on('click', function() {
+        buttonValue = button4.val();
+        correctAnswerFunction(buttonValue);
+    });
+};
+
 /*NEED TO KEEP ADDING ON THE NEWLY CREATED PAGES TO THIS FUNCTION AS ITS A TRACKER FOR CORRECT VALUES*/
 // function that uses the variabel which states which question the page is on and then uses that to make a variable related to the correct answer for that question and then send that through to the button click value match
 const correctAnswerFunction = function(buttonValue) {
-    console.log("second" + buttonValue)
     var correctAnswerFromQuestions = ""
     if (variablePageCurrent === "questionOne") {
         correctAnswerFromQuestions = question1Answers[0];
-        console.log("third" + correctAnswerFromQuestions)
-        console.log("fourth" + buttonValue)
         rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions); 
     } else if (variablePageCurrent === "questionTwo") {
         correctAnswerFromQuestions = question2Answers[2];
-        console.log(correctAnswerFromQuestions)
-        console.log(buttonValue)
         rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions);  
     } else if (variablePageCurrent === "questionThree") {
         correctAnswerFromQuestions = question3Answers[3];
@@ -271,8 +391,14 @@ const correctAnswerFunction = function(buttonValue) {
     } else if (variablePageCurrent === "questionFour") {
         correctAnswerFromQuestions = question4Answers[1];
         rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions);
+    } else if (variablePageCurrent === "questionFive") {
+        correctAnswerFromQuestions = question5Answers[2];
+        rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions);
+    } else if (variablePageCurrent === "questionSix") {
+        correctAnswerFromQuestions = question6Answers[1];
+        rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions);
     }
-};
+ };
 
 
 
@@ -291,7 +417,9 @@ const rightOrWrongAnswer = function(answer, correctAnswer) {
     } else {
         rightOrWrong.text('Incorrect! The correct answer was ' + correctAnswer);
         incorrectCounter ++;
+        secondsLeft -= 10;
         console.log("incorrect" + incorrectCounter); // *** take out
+        pageLooper();
     };
     
 };
