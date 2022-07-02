@@ -114,3 +114,73 @@ main {
 .question-one h2 {
     text-align: center;
 }
+
+/*question 2*/
+.question-two {
+    border: black solid 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.question-two h2 {
+    text-align: center;
+}
+
+/*question 3*/
+.question-three {
+    border: black solid 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.question-three h2 {
+    text-align: center;
+}
+
+/*question 4*/
+.question-four {
+    border: black solid 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.question-four h2 {
+    text-align: center;
+}
+
+/*question 5*/
+.question-five {
+    border: black solid 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.question-five h2 {
+    text-align: center;
+}
+
+/*question 6*/
+.question-six {
+    border: black solid 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.question-six h2 {
+    text-align: center;
+}

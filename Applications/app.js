@@ -1,10 +1,20 @@
 // SET UP VARIABLES FOR THE DIFFERENT ClASSES of different questions
 var beginBtn = $('#begin-btn');
 var questionOneId = $('.question-one');
+var questionTwoId = $('.question-two');
+var questionThreeId = $('.question-three');
+var questionFourId = $('.question-four');
+var questionFiveId = $('.question-five');
+var questionSixId = $('.question-six');
+
 var currentPage =$('.introduction')
 var container = $('.quiz-container');
 
 var variablePageCurrent = 'intro'
+
+// correct and incorrect counters
+var correctCounter = 0;
+var incorrectCounter = 0;
 
 // button creation
 var buttonContainer = $('<div>');
@@ -30,6 +40,8 @@ buttonContainer.append(button1);
 buttonContainer.append(button2);
 buttonContainer.append(button3);
 buttonContainer.append(button4);
+
+var buttonValue;
 
 var buttonArray = [button1, button2, button3, button4];
 
@@ -59,22 +71,6 @@ var question6Question = 'What is an example of camel case style of writing?';
 var question6Answers = ['CamelCase', 'camelCase', 'CAMELCASE', 'CaMeLcAsE'];
 
 
-
-//start button
-beginBtn.on('click', event => {
-    event.preventDefault();
-    if (variablePageCurrent === 'intro') {
-        variablePageCurrent = "questionOne";
-        currentPage.attr('class', 'question-one');
-        questionOneCreation();
-    } else {
-        variablePageCurrent = "intro";
-        currentPage.attr('class', 'introduction');
-        console.log(variablePageCurrent)
-    };
-    return variablePageCurrent;
-});
-
 //input the question array and match the buttons up with the answers and values
 const answerButtons = function(questionArrayAnswers) {
     buttonArray[0].text(questionArrayAnswers[0]);
@@ -85,6 +81,41 @@ const answerButtons = function(questionArrayAnswers) {
     buttonArray[2].val(questionArrayAnswers[2]);
     buttonArray[3].text(questionArrayAnswers[3]);
     buttonArray[3].val(questionArrayAnswers[3]);
+    console.log("eigth" + questionArrayAnswers)
+};
+
+//start button
+beginBtn.on('click', event => {
+    event.preventDefault();
+    if (variablePageCurrent === 'intro') {
+        variablePageCurrent = "questionOne";
+        currentPage.attr('class', 'question-one');
+        console.log("variablepagecurrent" + variablePageCurrent)
+        questionOneCreation();
+        return variablePageCurrent;
+    } 
+});
+
+// Page looper function to get to next page
+const pageLooper = function() {
+    if (variablePageCurrent === "questionOne") {
+        variablePageCurrent = "questionTwo";
+        console.log("sixth" + variablePageCurrent)
+        currentPage.attr('class', 'question-two');
+        console.log("currrrent" + currentPage)
+        questionTwoCreation();
+    } else if (variablePageCurrent === "questionTwo") {
+        variablePageCurrent = "questionThree";
+        console.log("newpagevariable" + variablePageCurrent);
+        currentPage.attr('class', 'question-three');
+        console.log('current page 3' + currentPage);
+        questionThreeCreation();
+    } else if (variablePageCurrent === "questionThree") {
+        variablePageCurrent = "questionFour";
+        console.log('fourth currentpage' + variablePageCurrent);
+        currentPage.attr('class', 'question-four');
+        questionFourCreation();
+    }
 };
 
 // creating question-one page
@@ -93,44 +124,174 @@ const questionOneCreation = function() {
     var questionOneQuestion = $('<h2>');
     questionOneQuestion.text(question1Question);
     currentPage.append(questionOneQuestion); 
-    //add in function call to function of question 1 button creation 
     currentPage.append(buttonContainer);
     answerButtons(question1Answers);  
+    
+    button1.on('click', event => {
+        buttonValue = button1.val();
+        event.preventDefault();
+        console.log(variablePageCurrent)
+        correctAnswerFunction(buttonValue);
+    });
 
+    button2.on('click', function() {
+        buttonValue = button2.val();
+        correctAnswerFunction(buttonValue);
+        console.log(buttonValue)
+    });
+    
+    button3.on('click', function() {
+        buttonValue = button3.val();
+        correctAnswerFunction(buttonValue);
+    });
+    
+    button4.on('click', function() {
+        buttonValue = button4.val();
+        correctAnswerFunction(buttonValue);
+    });
+};
+
+const questionTwoCreation = function() {
+    $('.question-two').empty();
+    var questionTwoQuestion = $('<h2>');
+    questionTwoQuestion.text(question2Question);
+    currentPage.append(questionTwoQuestion); 
+    currentPage.append(buttonContainer);
+    console.log("seventh" + question2Answers)
+    answerButtons(question2Answers);
+    
+    button1.on('click', event => {
+        buttonValue = button1.val();
+        event.preventDefault();
+        console.log(variablePageCurrent)
+        correctAnswerFunction(buttonValue);
+    });
+
+    button2.on('click', function() {
+        buttonValue = button2.val();
+        correctAnswerFunction(buttonValue);
+        console.log(buttonValue)
+    });
+    
+    button3.on('click', function() {
+        buttonValue = button3.val();
+        correctAnswerFunction(buttonValue);
+    });
+    
+    button4.on('click', function() {
+        buttonValue = button4.val();
+        correctAnswerFunction(buttonValue);
+    });
+};
+
+const questionThreeCreation = function() {
+    $('.question-three').empty();
+    var questionThreeQuestion = $('<h2>');
+    questionThreeQuestion.text(question3Question);
+    currentPage.append(questionThreeQuestion); 
+    currentPage.append(buttonContainer);
+    console.log("seventh" + question3Answers)
+    answerButtons(question3Answers);
+    
+    button1.on('click', event => {
+        buttonValue = button1.val();
+        event.preventDefault();
+        console.log(variablePageCurrent)
+        correctAnswerFunction(buttonValue);
+    });
+
+    button2.on('click', function() {
+        buttonValue = button2.val();
+        correctAnswerFunction(buttonValue);
+        console.log(buttonValue)
+    });
+    
+    button3.on('click', function() {
+        buttonValue = button3.val();
+        correctAnswerFunction(buttonValue);
+    });
+    
+    button4.on('click', function() {
+        buttonValue = button4.val();
+        correctAnswerFunction(buttonValue);
+    });
+};
+
+const questionFourCreation = function() {
+    $('.question-four').empty();
+    var questionFourQuestion = $('<h2>');
+    questionFourQuestion.text(question4Question);
+    currentPage.append(questionFourQuestion); 
+    currentPage.append(buttonContainer);
+    console.log("seventh" + question4Answers)
+    answerButtons(question4Answers);
+    
+    button1.on('click', event => {
+        buttonValue = button1.val();
+        event.preventDefault();
+        console.log(variablePageCurrent)
+        correctAnswerFunction(buttonValue);
+    });
+
+    button2.on('click', function() {
+        buttonValue = button2.val();
+        correctAnswerFunction(buttonValue);
+        console.log(buttonValue)
+    });
+    
+    button3.on('click', function() {
+        buttonValue = button3.val();
+        correctAnswerFunction(buttonValue);
+    });
+    
+    button4.on('click', function() {
+        buttonValue = button4.val();
+        correctAnswerFunction(buttonValue);
+    });
 };
 
 /*NEED TO KEEP ADDING ON THE NEWLY CREATED PAGES TO THIS FUNCTION AS ITS A TRACKER FOR CORRECT VALUES*/
 // function that uses the variabel which states which question the page is on and then uses that to make a variable related to the correct answer for that question and then send that through to the button click value match
 const correctAnswerFunction = function(buttonValue) {
-    console.log(buttonValue)
+    console.log("second" + buttonValue)
     var correctAnswerFromQuestions = ""
     if (variablePageCurrent === "questionOne") {
         correctAnswerFromQuestions = question1Answers[0];
+        console.log("third" + correctAnswerFromQuestions)
+        console.log("fourth" + buttonValue)
+        rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions); 
+    } else if (variablePageCurrent === "questionTwo") {
+        correctAnswerFromQuestions = question2Answers[2];
         console.log(correctAnswerFromQuestions)
         console.log(buttonValue)
+        rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions);  
+    } else if (variablePageCurrent === "questionThree") {
+        correctAnswerFromQuestions = question3Answers[3];
+        rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions); 
+    } else if (variablePageCurrent === "questionFour") {
+        correctAnswerFromQuestions = question4Answers[1];
         rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions);
-
-        
     }
 };
-// console.log(correctAnswerFunction('Flex'))
+
+
 
 //event listener for clicking on the buttons and then each click will then send the value of the click to the correct answer or not function to return if correct or wrong
-button1.on('click', function() {
-    var buttonValue = button1.val();
-    correctAnswerFunction(buttonValue);
-    console.log(buttonValue);
-    return buttonValue;
-    
-});
+// create in the listeneres an if statement for the page variable and then turn that it into the new questions
 
 
 // function for correct answer
 const rightOrWrongAnswer = function(answer, correctAnswer) {
     if (answer === correctAnswer) {
-        rightOrWrong.text("Correct!")
+        rightOrWrong.text("Correct!");
+        correctCounter ++;
+
+        console.log("fifth correct" + correctCounter); // *** take out
+        pageLooper();
     } else {
-        rightOrWrong.text('Incorrect!')
+        rightOrWrong.text('Incorrect! The correct answer was ' + correctAnswer);
+        incorrectCounter ++;
+        console.log("incorrect" + incorrectCounter); // *** take out
     };
     
 };
