@@ -54,6 +54,9 @@ var rightOrWrong = $('<h1>');
 rightOrWrong.addClass('correctIncorrect');
 buttonContainer.append(rightOrWrong);
 
+var scoreSubmissions = $('#highscore-submissions');
+
+
 
 //question answers
 var question1Question = 'What is the display property that is used to organise items within a container in a more flexible way?'
@@ -73,6 +76,55 @@ var question5Answers = ['p', 'title', 'src', 'html'];
 
 var question6Question = 'What is an example of camel case style of writing?';
 var question6Answers = ['CamelCase', 'camelCase', 'CAMELCASE', 'CaMeLcAsE'];
+
+var highScoreButton = $('#high-score');
+var refreshButton = $('#refresh')
+
+// high scores page
+//have an init function that puts the score on the page from the local storage and 
+
+refreshButton.on('click', event => {
+    event.preventDefault();
+    console.log("workedbeing")
+    var storedPlayerList = JSON.parse(localStorage.getItem('personScore'));
+    var highScoreName = storedPlayerList.submissionInput;
+    var highScoreScore = storedPlayerList.finalScore;
+    console.log(storedPlayerList)
+    console.log(highScoreName)
+    console.log(highScoreScore)
+    var liName = $('.nameList');
+    liName.text("Initials: " + highScoreName + " Score: " + highScoreScore)
+    console.log("worked")
+});
+
+var highScoreSubmissions = $('.highscore-submissions');
+var highScoreName;
+var highScoreScore;
+
+var highScoreList = $('.submit-list');
+var playerList = [];
+
+const init = function() {
+    
+    console.log("init worked")
+    if (storedPlayerList !== null) {
+        playerList = storedPlayerList;
+    }
+    renderHighScores();
+}
+
+const renderHighScores = function() {
+    console.log(storedPlayerList)
+    for (var i = 0; i < playerList.length; i++) {
+        var userScore = playerList[i];
+
+        var li = $('<li>');
+        li.text(userScore);
+        highScoreList.append(li);
+    }
+    console.log("render worked")
+};
+console.log(highScoreScore)
 
 
 //input the question array and match the buttons up with the answers and values
@@ -158,24 +210,57 @@ const finalScorePageCreation = function() {
     $('.final-score').empty();
     var finalScoreHeading = $('<h2>');
     var finalScore = $('<h1>');
+    finalScore.addClass('finalSubmissionScore')
+    var submissionForm = $('<form>');
+    submissionForm.addClass('submission-form');
     if (secondsLeft <= 0) {
         finalScoreHeading.text('Your final score is determined by the amount of time left, you ran out of time so your score is ');
         finalScore.text('0')
         currentPage.append(finalScoreHeading);
-        currentPage.append(finalScore)
+        currentPage.append(submissionForm);
+        submissionForm.append(finalScore)
     } else {
         finalScoreHeading.text('Your final score is determined by the amount of time left, your score is ');
         finalScore.text(secondsLeft - 1);
         currentPage.append(finalScoreHeading);
-        currentPage.append(finalScore);
+        currentPage.append(submissionForm);
+        submissionForm.append(finalScore);
     }
     
     var submissionText = $('<h3>');
     submissionText.text('Input your initials to submit your score: ')
-    submission
-    currentPage.append(submissionText);
-    // put a submit form for initials underneath which links to the high scores page
-}
+    submissionText.addClass('submission-text')
+    submissionForm.append(submissionText);
+
+    var submissionInput = $('<input>');
+    submissionInput.attr('type', 'text')
+    submissionInput.attr('placeholder', 'Input Initials');
+    submissionInput.attr('max-length', '10');
+    submissionInput.addClass('submission-input');
+    submissionForm.append(submissionInput);
+    
+    var submissionBtn = $('<button>');
+    submissionBtn.text('Submit');
+    submissionBtn.addClass('submission-btn');
+    submissionForm.append(submissionBtn);
+
+    console.log(submissionInput)
+
+    submissionBtn.on("click", function(event) {
+        event.preventDefault();
+        console.log(submissionInput)
+        console.log(secondsLeft)
+        var personScore = {
+            submissionInput: submissionInput.val(),
+            finalScore: secondsLeft
+        };
+        console.log(personScore)
+        localStorage.setItem('personScore', JSON.stringify(personScore));
+        });
+    
+};
+
+
 
 // creating question-one page
 const questionOneCreation = function() {
@@ -375,7 +460,7 @@ const questionSixCreation = function() {
     });
 };
 
-/*NEED TO KEEP ADDING ON THE NEWLY CREATED PAGES TO THIS FUNCTION AS ITS A TRACKER FOR CORRECT VALUES*/
+
 // function that uses the variabel which states which question the page is on and then uses that to make a variable related to the correct answer for that question and then send that through to the button click value match
 const correctAnswerFunction = function(buttonValue) {
     var correctAnswerFromQuestions = ""
@@ -400,12 +485,6 @@ const correctAnswerFunction = function(buttonValue) {
     }
  };
 
-
-
-//event listener for clicking on the buttons and then each click will then send the value of the click to the correct answer or not function to return if correct or wrong
-// create in the listeneres an if statement for the page variable and then turn that it into the new questions
-
-
 // function for correct answer
 const rightOrWrongAnswer = function(answer, correctAnswer) {
     if (answer === correctAnswer) {
@@ -423,37 +502,3 @@ const rightOrWrongAnswer = function(answer, correctAnswer) {
     };
     
 };
-
-
-
-//make a counter that takes in the correct answers and wrong asnwers etc which then gets presented to the end high score page, but add to the functions about the counters + 1 
-
-
-
-
-
-
-
-
-//SET UP AN ARRAY WHICH CONTAINS THE CLASSES FOR THE DIFFERENT QUESTIONS TO DO RANDOMLY
-
-//SET UP AN ON CLICK EVENT FOR THE BEGIN BUTTON TO GO TO A RANDOM QUESTION CLASS PAGE
-
-//CREATE THE BUTTONS WITH JQUERY FOR THE ANSWERS
-
-
-// THE TEXT WRONG OR CORRECT SHOWS UP AFTER GUESSING
-
-
-//SET UP THE TIMER
-
-
-
-
-
-//HAVE A FINAL RESULTS PAGE WITH FORM THAT SUBMITS THE INITIALS AND SCORE TO THE LOCALSTORAGE 
-
-
-
-
-//MAKE THE VIEW HIGH SCORE PAGE SAVE AND GET THE NAME AND SCORE WITH JSON AND THE LOCAL STORAGE

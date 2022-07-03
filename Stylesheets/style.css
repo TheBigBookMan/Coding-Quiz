@@ -12,6 +12,11 @@ body {
     justify-content: space-between;
 }
 
+#header a {
+    text-decoration: none;
+}
+
+
 /*header section content*/
 #high-score {
     display: inline;
@@ -23,6 +28,27 @@ body {
     font-weight: bolder;
 }
 
+#high-score:active {
+    background-color: green;
+}
+
+/*high score page back button*/
+#back {
+    width: 80px;
+    height: 30px;
+    margin: 20px;
+}
+
+#back a {
+    text-decoration: none;
+}
+
+/*Refresh scores button*/
+#refresh {
+    width: 120px;
+    height: 30px;
+    margin-bottom: 15px;
+}
 
 #timer {
     margin-right: 20px;
@@ -35,6 +61,8 @@ body {
     font-style: italic;
     font-weight: bolder;
 }
+
+
 
 /*main section*/
 main {
@@ -203,6 +231,13 @@ main {
 }
 
 /*final score page*/
+.final-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .final-score h2 {
     text-align: center;
     font-size: 30px;
@@ -212,4 +247,39 @@ main {
     text-align: center;
     margin-top: 40px;
     font-size: 70px;
+}
+
+.submission-text {
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.submission-input {
+    margin-top: 50px;
+    position: relative;
+    align-items: center;
+}
+
+.submission-btn {
+    width: 80px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+/*high score section */
+#highscore-title {
+    position: relative;
+
+    text-align: center;
+    color: red;
+}
+
+#highscore-container {
+    border: black solid 3px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
