@@ -421,7 +421,6 @@ const questionSixCreation = function() {
     });
 };
 
-
 // Function that takes in the button value from the buttons of the question that are clicked and uses if/else if statement to check if they are correct or incorrect
 const correctAnswerFunction = function(buttonValue) {
     var correctAnswerFromQuestions = "";
