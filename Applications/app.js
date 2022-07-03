@@ -1,26 +1,30 @@
-// SET UP VARIABLES FOR THE DIFFERENT ClASSES of different questions
+// Global variables
+// Begin button
 var beginBtn = $('#begin-btn');
+
+// Variables for each page of the quiz
 var questionOneId = $('.question-one');
 var questionTwoId = $('.question-two');
 var questionThreeId = $('.question-three');
 var questionFourId = $('.question-four');
 var questionFiveId = $('.question-five');
 var questionSixId = $('.question-six');
+var finalScorePage = $('.final-score');
 
-var finalScorePage = $('.final-score')
-
-var currentPage =$('.introduction')
+// Variables for use in main functions
+var currentPage =$('.introduction');
 var container = $('.quiz-container');
-
 var timeEl = $('#timer');
+var secondsLeft = 60;
 
-var variablePageCurrent = 'intro'
+// Variable for track of current page and to change pages
+var variablePageCurrent = 'intro';
 
-// correct and incorrect counters
+// Correct and incorrect counters
 var correctCounter = 0;
 var incorrectCounter = 0;
 
-// button creation
+// Button creation
 var buttonContainer = $('<div>');
 buttonContainer.addClass('btn-container');
 
@@ -46,23 +50,23 @@ buttonContainer.append(button3);
 buttonContainer.append(button4);
 
 var buttonValue;
-
 var buttonArray = [button1, button2, button3, button4];
 
-//right or wrong display
+// Right or wrong function variables
 var rightOrWrong = $('<h1>');
 rightOrWrong.addClass('correctIncorrect');
 buttonContainer.append(rightOrWrong);
 
+// High score page main variable
 var scoreSubmissions = $('#highscore-submissions');
+var refreshButton = $('#refresh');
 
-
-
-//question answers
-var question1Question = 'What is the display property that is used to organise items within a container in a more flexible way?'
+// Quiz questions and answers
+// Answers in arrays
+var question1Question = 'What is the display property that is used to organise items within a container in a more flexible way?';
 var question1Answers = ["Flex", "Relative", "Element", "Display"];
 
-var question2Question = 'What is the high-level programming language that was used mostly to make this project dynamically functioning?'
+var question2Question = 'What is the high-level programming language that was used mostly to make this project dynamically functioning?';
 var question2Answers = ["Python", "Solidity", "Javascript", "C++"];
 
 var question3Question = 'How many times can you give elements the same ID name?';
@@ -77,57 +81,19 @@ var question5Answers = ['p', 'title', 'src', 'html'];
 var question6Question = 'What is an example of camel case style of writing?';
 var question6Answers = ['CamelCase', 'camelCase', 'CAMELCASE', 'CaMeLcAsE'];
 
-var highScoreButton = $('#high-score');
-var refreshButton = $('#refresh')
-
-// high scores page
-//have an init function that puts the score on the page from the local storage and 
-
+// Function for the refresh button that refreshes user names on the high score page
 refreshButton.on('click', event => {
     event.preventDefault();
-    console.log("workedbeing")
+    // Gets the object from local storage using JSON
     var storedPlayerList = JSON.parse(localStorage.getItem('personScore'));
     var highScoreName = storedPlayerList.submissionInput;
     var highScoreScore = storedPlayerList.finalScore;
-    console.log(storedPlayerList)
-    console.log(highScoreName)
-    console.log(highScoreScore)
+    // Add the persons initials and score to the unordered list
     var liName = $('.nameList');
-    liName.text("Initials: " + highScoreName + " Score: " + highScoreScore)
-    console.log("worked")
+    liName.text("Initials: " + highScoreName + " Score: " + highScoreScore);
 });
 
-var highScoreSubmissions = $('.highscore-submissions');
-var highScoreName;
-var highScoreScore;
-
-var highScoreList = $('.submit-list');
-var playerList = [];
-
-const init = function() {
-    
-    console.log("init worked")
-    if (storedPlayerList !== null) {
-        playerList = storedPlayerList;
-    }
-    renderHighScores();
-}
-
-const renderHighScores = function() {
-    console.log(storedPlayerList)
-    for (var i = 0; i < playerList.length; i++) {
-        var userScore = playerList[i];
-
-        var li = $('<li>');
-        li.text(userScore);
-        highScoreList.append(li);
-    }
-    console.log("render worked")
-};
-console.log(highScoreScore)
-
-
-//input the question array and match the buttons up with the answers and values
+// Function that assigns the titles and values from each question to the buttons
 const answerButtons = function(questionArrayAnswers) {
     buttonArray[0].text(questionArrayAnswers[0]);
     buttonArray[0].val(questionArrayAnswers[0]);
@@ -137,16 +103,14 @@ const answerButtons = function(questionArrayAnswers) {
     buttonArray[2].val(questionArrayAnswers[2]);
     buttonArray[3].text(questionArrayAnswers[3]);
     buttonArray[3].val(questionArrayAnswers[3]);
-    console.log("eigth" + questionArrayAnswers)
 };
 
-var secondsLeft = 60;
-
+// Function that sets a timer to count down
 const setTime = function() {
     var timerInterval = setInterval(function() {
         secondsLeft--;
         timeEl.text("Time: " + secondsLeft);
-
+        // If statement that says if the timer goes to 0 then the screen jumps to the finalScore page
         if (secondsLeft <= 0) {
             clearInterval(timerInterval);
             variablePageCurrent = "questionSix";
@@ -155,43 +119,36 @@ const setTime = function() {
             clearInterval(timerInterval);
         }
     }, 1000);
-}
+};
 
-//start button
+// Begin button on the introduction page with a listener that starts the quiz by going to questionOnePage and starts the timer
 beginBtn.on('click', event => {
     event.preventDefault();
     if (variablePageCurrent === 'intro') {
         variablePageCurrent = "questionOne";
         currentPage.attr('class', 'question-one');
-        console.log("variablepagecurrent" + variablePageCurrent)
         questionOneCreation();
         setTime();
         return variablePageCurrent;
     } 
 });
 
-// Page looper function to get to next page
+// Page looper function to get to next page, uses the variablePageCurrent to check for current status and then goes to the next page on calling
 const pageLooper = function() {
     if (variablePageCurrent === "questionOne") {
         variablePageCurrent = "questionTwo";
-        console.log("sixth" + variablePageCurrent)
         currentPage.attr('class', 'question-two');
-        console.log("currrrent" + currentPage)
         questionTwoCreation();
     } else if (variablePageCurrent === "questionTwo") {
         variablePageCurrent = "questionThree";
-        console.log("newpagevariable" + variablePageCurrent);
         currentPage.attr('class', 'question-three');
-        console.log('current page 3' + currentPage);
         questionThreeCreation();
     } else if (variablePageCurrent === "questionThree") {
         variablePageCurrent = "questionFour";
-        console.log('fourth currentpage' + variablePageCurrent);
         currentPage.attr('class', 'question-four');
         questionFourCreation();
     } else if (variablePageCurrent === "questionFour") {
         variablePageCurrent = "questionFive";
-        console.log('fifthcurrentpage' + variablePageCurrent);
         currentPage.attr('class', 'question-five');
         questionFiveCreation();
     } else if (variablePageCurrent === "questionFive") {
@@ -205,17 +162,19 @@ const pageLooper = function() {
     }
 };
 
-//function for creating final score page
+// Function that creates the finals score page
 const finalScorePageCreation = function() {
+    // Erasing the elements and then using JQUERY to add in elements and content through the DOM
     $('.final-score').empty();
     var finalScoreHeading = $('<h2>');
     var finalScore = $('<h1>');
-    finalScore.addClass('finalSubmissionScore')
+    finalScore.addClass('finalSubmissionScore');
     var submissionForm = $('<form>');
     submissionForm.addClass('submission-form');
+    // If statement to check on the final page if the player ran out of time or if they answered all questions and made it to the end
     if (secondsLeft <= 0) {
         finalScoreHeading.text('Your final score is determined by the amount of time left, you ran out of time so your score is ');
-        finalScore.text('0')
+        finalScore.text('0');
         currentPage.append(finalScoreHeading);
         currentPage.append(submissionForm);
         submissionForm.append(finalScore)
@@ -227,13 +186,14 @@ const finalScorePageCreation = function() {
         submissionForm.append(finalScore);
     }
     
+    // Creating the submit button the final page
     var submissionText = $('<h3>');
-    submissionText.text('Input your initials to submit your score: ')
-    submissionText.addClass('submission-text')
+    submissionText.text('Input your initials to submit your score: ');
+    submissionText.addClass('submission-text');
     submissionForm.append(submissionText);
 
     var submissionInput = $('<input>');
-    submissionInput.attr('type', 'text')
+    submissionInput.attr('type', 'text');
     submissionInput.attr('placeholder', 'Input Initials');
     submissionInput.attr('max-length', '10');
     submissionInput.addClass('submission-input');
@@ -244,44 +204,40 @@ const finalScorePageCreation = function() {
     submissionBtn.addClass('submission-btn');
     submissionForm.append(submissionBtn);
 
-    console.log(submissionInput)
-
+    // Submit button has a listener to send the final score and initials of the player to local storage through JASON object
     submissionBtn.on("click", function(event) {
         event.preventDefault();
-        console.log(submissionInput)
-        console.log(secondsLeft)
         var personScore = {
             submissionInput: submissionInput.val(),
             finalScore: secondsLeft
         };
-        console.log(personScore)
+
         localStorage.setItem('personScore', JSON.stringify(personScore));
-        });
-    
+        }
+    );
 };
 
-
-
-// creating question-one page
+// Creating the question one page
 const questionOneCreation = function() {
+    // Emptying the elements from the page
     $('.question-one').empty();
+    // Using JQUERY and the DOM to insert question and the answer buttons on the page
     var questionOneQuestion = $('<h2>');
     questionOneQuestion.text(question1Question);
     currentPage.append(questionOneQuestion); 
     currentPage.append(buttonContainer);
+    // Assigning the buttons with text and values to them
     answerButtons(question1Answers);  
-    
+    // Event listeners for the buttons and once clicked to see if they are correct or incorrect
     button1.on('click', event => {
         buttonValue = button1.val();
         event.preventDefault();
-        console.log(variablePageCurrent)
         correctAnswerFunction(buttonValue);
     });
 
     button2.on('click', function() {
         buttonValue = button2.val();
         correctAnswerFunction(buttonValue);
-        console.log(buttonValue)
     });
     
     button3.on('click', function() {
@@ -295,26 +251,27 @@ const questionOneCreation = function() {
     });
 };
 
+// Creating the question two page
 const questionTwoCreation = function() {
+    // Emptying the elements from the page
     $('.question-two').empty();
+    // Using JQUERY and the DOM to insert question and the answer buttons on the page
     var questionTwoQuestion = $('<h2>');
     questionTwoQuestion.text(question2Question);
     currentPage.append(questionTwoQuestion); 
     currentPage.append(buttonContainer);
-    console.log("seventh" + question2Answers)
+    // Assigning the buttons with text and values to them
     answerButtons(question2Answers);
-    
+    // Event listeners for the buttons and once clicked to see if they are correct or incorrect
     button1.on('click', event => {
         buttonValue = button1.val();
         event.preventDefault();
-        console.log(variablePageCurrent)
         correctAnswerFunction(buttonValue);
     });
 
     button2.on('click', function() {
         buttonValue = button2.val();
         correctAnswerFunction(buttonValue);
-        console.log(buttonValue)
     });
     
     button3.on('click', function() {
@@ -328,26 +285,27 @@ const questionTwoCreation = function() {
     });
 };
 
+// Creating the question three page
 const questionThreeCreation = function() {
+    // Emptying the elements from the page
     $('.question-three').empty();
+    // Using JQUERY and the DOM to insert question and the answer buttons on the page
     var questionThreeQuestion = $('<h2>');
     questionThreeQuestion.text(question3Question);
     currentPage.append(questionThreeQuestion); 
     currentPage.append(buttonContainer);
-    console.log("seventh" + question3Answers)
+    // Assigning the buttons with text and values to them
     answerButtons(question3Answers);
-    
+    // Event listeners for the buttons and once clicked to see if they are correct or incorrect
     button1.on('click', event => {
         buttonValue = button1.val();
         event.preventDefault();
-        console.log(variablePageCurrent)
         correctAnswerFunction(buttonValue);
     });
 
     button2.on('click', function() {
         buttonValue = button2.val();
         correctAnswerFunction(buttonValue);
-        console.log(buttonValue)
     });
     
     button3.on('click', function() {
@@ -361,26 +319,27 @@ const questionThreeCreation = function() {
     });
 };
 
+// Creating the question four page
 const questionFourCreation = function() {
+    // Emptying the elements from the page
     $('.question-four').empty();
+    // Using JQUERY and the DOM to insert question and the answer buttons on the page
     var questionFourQuestion = $('<h2>');
     questionFourQuestion.text(question4Question);
     currentPage.append(questionFourQuestion); 
     currentPage.append(buttonContainer);
-    console.log("seventh" + question4Answers)
+    // Assigning the buttons with text and values to them
     answerButtons(question4Answers);
-    
+    // Event listeners for the buttons and once clicked to see if they are correct or incorrect
     button1.on('click', event => {
         buttonValue = button1.val();
         event.preventDefault();
-        console.log(variablePageCurrent)
         correctAnswerFunction(buttonValue);
     });
 
     button2.on('click', function() {
         buttonValue = button2.val();
         correctAnswerFunction(buttonValue);
-        console.log(buttonValue)
     });
     
     button3.on('click', function() {
@@ -394,26 +353,27 @@ const questionFourCreation = function() {
     });
 };
 
+// Creating the question five page
 const questionFiveCreation = function() {
+    // Emptying the elements from the page
     $('.question-five').empty();
+    // Using JQUERY and the DOM to insert question and the answer buttons on the page
     var questionFiveQuestion = $('<h2>');
     questionFiveQuestion.text(question5Question);
     currentPage.append(questionFiveQuestion); 
     currentPage.append(buttonContainer);
-    console.log("seventh" + question5Answers)
+    // Assigning the buttons with text and values to them
     answerButtons(question5Answers);
-    
+    // Event listeners for the buttons and once clicked to see if they are correct or incorrect
     button1.on('click', event => {
         buttonValue = button1.val();
         event.preventDefault();
-        console.log(variablePageCurrent)
         correctAnswerFunction(buttonValue);
     });
 
     button2.on('click', function() {
         buttonValue = button2.val();
         correctAnswerFunction(buttonValue);
-        console.log(buttonValue)
     });
     
     button3.on('click', function() {
@@ -427,26 +387,27 @@ const questionFiveCreation = function() {
     });
 };
 
+// Creating the question six page
 const questionSixCreation = function() {
+    // Emptying the elements from the page
     $('.question-six').empty();
+    // Using JQUERY and the DOM to insert question and the answer buttons on the page
     var questionSixQuestion = $('<h2>');
     questionSixQuestion.text(question6Question);
     currentPage.append(questionSixQuestion); 
     currentPage.append(buttonContainer);
-    console.log("seventh" + question6Answers)
+    // Assigning the buttons with text and values to them
     answerButtons(question6Answers);
-    
+    // Event listeners for the buttons and once clicked to see if they are correct or incorrect
     button1.on('click', event => {
         buttonValue = button1.val();
         event.preventDefault();
-        console.log(variablePageCurrent)
         correctAnswerFunction(buttonValue);
     });
 
     button2.on('click', function() {
         buttonValue = button2.val();
         correctAnswerFunction(buttonValue);
-        console.log(buttonValue)
     });
     
     button3.on('click', function() {
@@ -461,9 +422,9 @@ const questionSixCreation = function() {
 };
 
 
-// function that uses the variabel which states which question the page is on and then uses that to make a variable related to the correct answer for that question and then send that through to the button click value match
+// Function that takes in the button value from the buttons of the question that are clicked and uses if/else if statement to check if they are correct or incorrect
 const correctAnswerFunction = function(buttonValue) {
-    var correctAnswerFromQuestions = ""
+    var correctAnswerFromQuestions = "";
     if (variablePageCurrent === "questionOne") {
         correctAnswerFromQuestions = question1Answers[0];
         rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions); 
@@ -483,22 +444,18 @@ const correctAnswerFunction = function(buttonValue) {
         correctAnswerFromQuestions = question6Answers[1];
         rightOrWrongAnswer(buttonValue, correctAnswerFromQuestions);
     }
- };
+};
 
-// function for correct answer
+// Function that takes in the answer guessed by the user and compares it to the correct answer for that question and then outputs if it's correct or incorrect and then calls the function to go to the next page
 const rightOrWrongAnswer = function(answer, correctAnswer) {
     if (answer === correctAnswer) {
         rightOrWrong.text("Correct!");
         correctCounter ++;
-
-        console.log("fifth correct" + correctCounter); // *** take out
         pageLooper();
     } else {
         rightOrWrong.text('Incorrect! The correct answer was ' + correctAnswer);
         incorrectCounter ++;
         secondsLeft -= 10;
-        console.log("incorrect" + incorrectCounter); // *** take out
         pageLooper();
     };
-    
 };
