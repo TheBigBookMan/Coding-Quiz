@@ -1,5 +1,4 @@
 body {
-    border: solid red 3px;
     width: 100%;
     height: 100%;
 }
@@ -22,7 +21,6 @@ body {
     display: inline;
     width: 200px;
     height: 30px;
-    border: black solid 3px;
     border-radius: 20px;
     background-color: greenyellow;
     font-weight: bolder;
@@ -48,6 +46,7 @@ body {
     width: 120px;
     height: 30px;
     margin-bottom: 15px;
+    margin-top: 5px;
 }
 
 #timer {
@@ -66,7 +65,6 @@ body {
 
 /*main section*/
 main {
-    border: black solid 2px;
     width:100%;
     height: 100%;
     margin: 0;
@@ -74,7 +72,7 @@ main {
 
 /*introduction content*/
 .introduction p {
-    border: blueviolet solid 3px;
+    /* border: blueviolet solid 3px; */
     max-width: 500px;
 }
 
@@ -93,7 +91,6 @@ main {
 
 /*answer buttons container*/
 .btn-container {
-    border: 3px solid black;
     width: 100%;
     height: 75%;
     display: flex;
@@ -123,7 +120,7 @@ main {
 
 /*quiz container*/
 .quiz-container {
-    border: red solid 3px;
+    /* border: red solid 3px; */
     position: relative;
     width: 75%;
     height: 500px;
@@ -133,7 +130,7 @@ main {
 /*quiz introduction*/
 /*introduction container*/
 .introduction {
-    border: greenyellow solid 4px;
+    /* border: greenyellow solid 4px; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -148,7 +145,6 @@ main {
 
 /*question 1*/
 .question-one {
-    border: black solid 4px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -162,7 +158,6 @@ main {
 
 /*question 2*/
 .question-two {
-    border: black solid 4px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -176,7 +171,6 @@ main {
 
 /*question 3*/
 .question-three {
-    border: black solid 4px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -190,7 +184,6 @@ main {
 
 /*question 4*/
 .question-four {
-    border: black solid 4px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -204,7 +197,6 @@ main {
 
 /*question 5*/
 .question-five {
-    border: black solid 4px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -218,7 +210,6 @@ main {
 
 /*question 6*/
 .question-six {
-    border: black solid 4px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -276,7 +267,6 @@ main {
 }
 
 #highscore-container {
-    border: black solid 3px;
     height: 100%;
     display: flex;
     flex-direction: column;
