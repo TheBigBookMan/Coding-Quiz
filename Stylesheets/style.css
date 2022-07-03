@@ -3,7 +3,7 @@ body {
     height: 100%;
 }
 
-/*header section container*/
+/*Header section container*/
 #header {
     border-bottom: black solid 3px;
     padding: 10px;
@@ -15,8 +15,7 @@ body {
     text-decoration: none;
 }
 
-
-/*header section content*/
+/*Header section content*/
 #high-score {
     display: inline;
     width: 200px;
@@ -30,7 +29,7 @@ body {
     background-color: green;
 }
 
-/*high score page back button*/
+/*High score page back button*/
 #back {
     width: 80px;
     height: 30px;
@@ -49,6 +48,7 @@ body {
     margin-top: 5px;
 }
 
+/*Timer*/
 #timer {
     margin-right: 20px;
     margin-top: 3px;
@@ -61,21 +61,14 @@ body {
     font-weight: bolder;
 }
 
-
-
-/*main section*/
+/*Main section*/
 main {
     width:100%;
     height: 100%;
     margin: 0;
 }
 
-/*introduction content*/
-.introduction p {
-    /* border: blueviolet solid 3px; */
-    max-width: 500px;
-}
-
+/*Begin button*/
 #begin-btn {
     background-color: yellow;
     border-radius: 10px;
@@ -89,7 +82,7 @@ main {
     background-color: orange;
 }
 
-/*answer buttons container*/
+/*Answer buttons container*/
 .btn-container {
     width: 100%;
     height: 75%;
@@ -101,7 +94,7 @@ main {
     padding: 20px;
 }
 
-/* answer buttons*/
+/*Answer buttons*/
 .btn-all {
     width: 300px;
     height: 50px;
@@ -118,19 +111,21 @@ main {
     background-color: aliceblue;
 }
 
-/*quiz container*/
+/*Quiz container*/
 .quiz-container {
-    /* border: red solid 3px; */
     position: relative;
     width: 75%;
     height: 500px;
     margin: 50px auto;
 }
 
-/*quiz introduction*/
+.correctIncorrect {
+    text-align: center;
+}
+
+/*Quiz introduction*/
 /*introduction container*/
 .introduction {
-    /* border: greenyellow solid 4px; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -139,11 +134,12 @@ main {
     display: hide;
 }
 
-.correctIncorrect {
-    text-align: center;
+/*Introduction content*/
+.introduction p {
+    max-width: 500px;
 }
 
-/*question 1*/
+/*Question 1*/
 .question-one {
     height: 100%;
     display: flex;
@@ -156,7 +152,7 @@ main {
     text-align: center;
 }
 
-/*question 2*/
+/*Question 2*/
 .question-two {
     height: 100%;
     display: flex;
@@ -169,7 +165,7 @@ main {
     text-align: center;
 }
 
-/*question 3*/
+/*Question 3*/
 .question-three {
     height: 100%;
     display: flex;
@@ -182,7 +178,7 @@ main {
     text-align: center;
 }
 
-/*question 4*/
+/*Question 4*/
 .question-four {
     height: 100%;
     display: flex;
@@ -195,7 +191,7 @@ main {
     text-align: center;
 }
 
-/*question 5*/
+/*Question 5*/
 .question-five {
     height: 100%;
     display: flex;
@@ -208,7 +204,7 @@ main {
     text-align: center;
 }
 
-/*question 6*/
+/*Question 6*/
 .question-six {
     height: 100%;
     display: flex;
@@ -221,7 +217,7 @@ main {
     text-align: center;
 }
 
-/*final score page*/
+/*Final score page*/
 .final-score {
     display: flex;
     flex-direction: column;
@@ -240,6 +236,7 @@ main {
     font-size: 70px;
 }
 
+/*Submission content*/
 .submission-text {
     margin-top: 20px;
     text-align: center;
@@ -258,10 +255,9 @@ main {
     margin-top: 10px;
 }
 
-/*high score section */
+/*High score section */
 #highscore-title {
     position: relative;
-
     text-align: center;
     color: red;
 }
