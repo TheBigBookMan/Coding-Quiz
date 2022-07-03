@@ -35,4 +35,5 @@ Once the user has run out of time or finished answering the questions, they are 
 ## Screenshot
 ![](./Images/Screenshot.jpg)
 
-## URL Deployed Site
+## Deployed URL
+https://thebigbookman.github.io/Coding-Quiz/index.html
